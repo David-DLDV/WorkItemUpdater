@@ -109,6 +109,21 @@
             }
         },
         {
+            "name": "workItemsLimit",
+            "type": "string",
+            "label": "Max WorkItems to update",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "If defined, the max workitems to update (default is 50). ",
+            "properties": {
+                "DisableManageLink": "True"
+            },
+            "validation": {
+                "expression": "isMatch(value,'[0-9]\\d*$')",
+                "message": "Invalid input, must be a number."
+            }
+        },
+        {
             "name": "workItemDone",
             "type": "boolean",
             "label": "Move to board column Done",

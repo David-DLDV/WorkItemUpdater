@@ -102,6 +102,7 @@ function getSettings(): Settings {
     settings.workItemCurrentState = tl.getInput('workItemCurrentState');
     settings.workItemKanbanLane = tl.getInput('workItemKanbanLane');
     settings.workItemKanbanState = tl.getInput('workItemKanbanState');
+    settings.workItemsLimit = parseInt(tl.getInput('workItemsLimit'));
     settings.workItemDone = tl.getBoolInput('workItemDone');
     settings.linkBuild = tl.getBoolInput('linkBuild');
     settings.updateAssignedTo = tl.getInput('updateAssignedTo');
@@ -145,6 +146,7 @@ function getSettings(): Settings {
     tl.debug('workItemCurrentState ' + settings.workItemCurrentState);
     tl.debug('updateWorkItemKanbanLane ' + settings.workItemKanbanLane);
     tl.debug('WorkItemKanbanState ' + settings.workItemKanbanState);
+    tl.debug('workItemsLimit ' + settings.workItemsLimit);
     tl.debug('WorkItemDone ' + settings.workItemDone);
     tl.debug('updateAssignedTo ' + settings.updateAssignedTo);
     tl.debug('updateAssignedToWith ' + settings.updateAssignedToWith);
@@ -167,7 +169,7 @@ async function getWorkItemsRefs(vstsWebApi: WebApi, workItemTrackingClient: IWor
             if (deployments.length > 0) {
                 const baseReleaseId = deployments[0].release.id;
                 tl.debug('Using Release ' + baseReleaseId + ' as BaseRelease for ' + settings.releaseId);
-                const releaseWorkItemRefs = await releaseClient.getReleaseWorkItemsRefs(settings.projectId, settings.releaseId, baseReleaseId);
+                const releaseWorkItemRefs = await releaseClient.getReleaseWorkItemsRefs(settings.projectId, settings.releaseId, baseReleaseId, settings.workItemsLimit);
                 const result: ResourceRef[] = [];
                 releaseWorkItemRefs.forEach((releaseWorkItem) => {
                     result.push({

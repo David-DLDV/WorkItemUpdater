@@ -13,6 +13,7 @@ export class Settings {
     public workItemCurrentState: string;
     public workItemKanbanLane: string;
     public workItemKanbanState: string;
+    public workItemsLimit: number;
     public workItemDone: boolean;
     public linkBuild: boolean;
     public updateAssignedTo: string;
